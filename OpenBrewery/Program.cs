@@ -6,10 +6,10 @@ using OpenBrewery.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.Configure<ApiSettings>(builder.Configuration.GetSection("ApiSettings"));
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 
-builder.Services.AddSingleton<OpenBreweryDbClient>();
-builder.Services.AddTransient<BreweriesService>();
+builder.Services.AddTransient<IOpenBreweryDbClient, OpenBreweryDbClient>();
+builder.Services.AddTransient<IBreweriesService, BreweriesService>();
 
 builder.Services.AddMemoryCache();
 

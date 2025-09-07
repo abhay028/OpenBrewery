@@ -1,6 +1,7 @@
 ﻿namespace OpenBrewery.Models;
 
-public class ApiSettings
+public class AppSettings
 {
     public string BaseUrl { get; set; }
+    public int CacheDuration { get; set; }
 }

@@ -12,9 +12,9 @@ namespace OpenBrewery.Controllers;
 public class BreweriesController : ControllerBase
 {
     private readonly ILogger<BreweriesController> logger;
-    private readonly BreweriesService breweryService;
+    private readonly IBreweriesService breweryService;
 
-    public BreweriesController(ILogger<BreweriesController> logger, BreweriesService breweryService)
+    public BreweriesController(ILogger<BreweriesController> logger, IBreweriesService breweryService)
     {
         this.logger = logger;
         this.breweryService = breweryService;

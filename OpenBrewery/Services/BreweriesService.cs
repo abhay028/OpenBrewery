@@ -1,20 +1,21 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Options;
 using OpenBrewery.HttpClients;
 using OpenBrewery.Models;
 
 namespace OpenBrewery.Services;
 
-public class BreweriesService
+public class BreweriesService : IBreweriesService
 {
     private readonly IMemoryCache cache;
-    private readonly OpenBreweryDbClient openBreweryDbClient;
+    private readonly IOpenBreweryDbClient openBreweryDbClient;
     private readonly TimeSpan cacheDuration;
 
-    public BreweriesService(IMemoryCache cache, OpenBreweryDbClient openBreweryDbClient)
+    public BreweriesService(IMemoryCache cache, IOpenBreweryDbClient openBreweryDbClient, IOptions<AppSettings> options)
     {
         this.cache = cache;
         this.openBreweryDbClient = openBreweryDbClient;
-        this.cacheDuration = TimeSpan.FromMinutes(10);
+        this.cacheDuration = TimeSpan.FromMinutes(options.Value.CacheDuration);
     }
 
     public async Task<List<Brewery>> GetBreweriesAsync(

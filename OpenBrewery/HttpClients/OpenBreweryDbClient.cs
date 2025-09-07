@@ -5,12 +5,12 @@ using OpenBrewery.Models;
 
 namespace OpenBrewery.HttpClients;
 
-public class OpenBreweryDbClient
+public class OpenBreweryDbClient : IOpenBreweryDbClient
 {
     private readonly string baseUrl;
     private readonly HttpClient httpClient;
 
-    public OpenBreweryDbClient(IOptions<ApiSettings> options)
+    public OpenBreweryDbClient(IOptions<AppSettings> options)
     {
         baseUrl = options.Value.BaseUrl;
         httpClient = new HttpClient
